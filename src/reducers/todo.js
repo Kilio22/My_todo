@@ -1,3 +1,5 @@
+import { combineReducers } from 'redux';
+
 const todo = (todo, action) => {
     switch (action.type) {
         case 'ADD_TODO':
@@ -14,15 +16,46 @@ const todo = (todo, action) => {
         default:
             return todo;
     }
-}
+};
 
-export const todos = (state = [], action) => {
+const byIds = (state = {}, action) => {
     switch (action.type) {
         case 'ADD_TODO':
-            return [...state, todo(undefined, action)];
         case 'TOGGLE_TODO':
-            return state.map(single_todo => todo(single_todo, action));
+            return {
+                ...state,
+                [action.id]: todo(state[action.id], action)
+            }
         default:
             return state;
+    }
+};
+const allIds = (state = [], action) => {
+    switch (action.type) {
+        case 'ADD_TODO':
+            return [...state, action.id]
+        default:
+            return state
+    }
+};
+const getAllTodos = (state) => {
+    return state.allIds.map(id => state.byIds[id]);
+};
+export const todos = combineReducers({
+    byIds,
+    allIds
+});
+
+export const filterSorter = (state, filter) => {
+    const todos = getAllTodos(state);
+    switch (filter) {
+        case 'all':
+            return todos;
+        case 'completed':
+            return todos.filter(todo => todo.completed)
+        case 'visible':
+            return todos.filter(todo => !todo.completed)
+        default:
+            return todos;
     }
 };

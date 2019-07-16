@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "deep-freeze": "0.0.1",
     "expect": "^24.8.0",
     "history": "^4.9.0",

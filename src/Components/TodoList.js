@@ -3,19 +3,7 @@ import React from 'react';
 import { withRouter } from 'react-router';
 
 import { toggleTodo } from '../actions/toggleTodo';
-
-const filterSorter = (todos, filter) => {
-    switch (filter) {
-        case 'all':
-            return todos;
-        case 'completed':
-            return todos.filter(todo => todo.completed)
-        case 'visible':
-            return todos.filter(todo => !todo.completed)
-        default:
-            return todos;
-    }
-};
+import { getVisibleTodos } from '../configureStore';
 
 const Todo = ({todo, onClick}) => (
     <h1 onClick={() => onClick()}
@@ -29,11 +17,8 @@ const TodoList = ({todos, onClick}) => (
         </div>);
     }));
 const mapStatePrintToProps = (state, { match }) => ({
-        todos: filterSorter(state.todos, match.params.filter || 'all')
+        todos: getVisibleTodos(state, match.params.filter || 'all')
     });
-/* const mapDispatchPrintToProps = (dispatch) => ({
-        onClick: (id) => {dispatch(toggleTodo(id))}
-    }); */
 export const PrintTodoList = withRouter(connect(
     mapStatePrintToProps,
     { onClick: toggleTodo }
