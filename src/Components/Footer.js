@@ -1,45 +1,31 @@
-import { connect } from 'react-redux';
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
-import { changeFilter } from '../actions/changeFilter';
-
-const Link = ({ buttonName, onClick, active }) => {
-    if (active)
-        return (<span>{buttonName}</span>)
+const FilterStyle = ({filter, children}) => {
     return (
-        <button onClick={(e) => {
-            e.preventDefault();
-            onClick();
+    <NavLink
+        exact
+        to={'/' + (filter === 'all' ? '' : filter)}
+        activeStyle={{
+            textDecoration: 'none',
+            color: 'black'
         }}>
-        {buttonName}
-        </button>
-    );
+        {children}
+    </NavLink>
+    )
 };
-const mapStateLinkToProps = (state, props) => {
-    return {
-        active: props.name === state.my_filter,
-        buttonName: props.name
-    }
-};
-const mapDispatchLinkToProps = (dispatch, props) => {
-    return {
-        onClick: () => {
-            dispatch(changeFilter(props.name))
-        }
-    };
-};
-const FilterStyle = connect(
-    mapStateLinkToProps,
-    mapDispatchLinkToProps
-)(Link);
-export const Footer = () => {
-    return (
+export const Footer = () => (
     <p>
-        <FilterStyle name='ALL'/>
+        <FilterStyle filter='all'>
+            All
+        </FilterStyle>
         {' '}
-        <FilterStyle name='COMPLETED'/>
+        <FilterStyle filter='completed'>
+            Completed
+        </FilterStyle>
         {' '}
-        <FilterStyle name='VISIBLE'/>
+        <FilterStyle filter='visible'>
+            Visible
+        </FilterStyle>
     </p>
-    );
-};
+);

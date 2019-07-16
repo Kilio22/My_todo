@@ -1,11 +1,7 @@
-let nb_id = 0;
+import { v4 } from 'node-uuid';
 
-export const addTodo = (input) => {
-    return (
-        {
-            type: 'ADD_TODO',
-            id: nb_id++,
-            text: input
-        }
-    )
-};
+export const addTodo = (input) => ({
+    type: 'ADD_TODO',
+    id: v4(),
+    text: input
+});

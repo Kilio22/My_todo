@@ -4,12 +4,10 @@ import { InputList } from './Input';
 import { PrintTodoList } from './TodoList';
 import { Footer } from './Footer';
 
-export const App = () => {
-    return (
+export const App = ({ match }) => (
     <div>
         <InputList />
-        <PrintTodoList />
+        <PrintTodoList/>
         <Footer />
     </div>
-    );
-}
+);
