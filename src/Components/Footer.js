@@ -14,6 +14,7 @@ const FilterStyle = ({filter, children}) => {
     </NavLink>
     )
 };
+
 export const Footer = () => (
     <p>
         <FilterStyle filter='all'>

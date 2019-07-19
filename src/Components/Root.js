@@ -5,14 +5,16 @@ import { BrowserRouter } from 'react-router-dom';
 
 import { App } from './App';
 
-export const Root = ({ store }) => {
+const Root = ({ store }) => {
     return (
     <Provider store={store}>
         <BrowserRouter>
-            <Route path='/:filter?' render={({match}) => (
+            <Route path='/:filter?'>
                 <App />
-            )}/>
+            </Route>
         </BrowserRouter>
     </Provider >
     );
-}
+};
+
+export default Root;

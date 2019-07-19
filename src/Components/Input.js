@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import React from 'react';
 
-import {addTodo} from '../actions/addTodo';
+import {addTodo} from '../actions/actions';
 
 export let InputList = ({ dispatch }) => {
     let input;
@@ -13,5 +13,5 @@ export let InputList = ({ dispatch }) => {
         input.value = ''}}>Add todo</button>
     </div>
     );
-}
+};
 InputList = connect()(InputList)
