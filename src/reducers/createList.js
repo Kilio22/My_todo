@@ -16,6 +16,9 @@ const createList = (filter) => {
                 return filter !== 'completed' ? [...state, action.response.result] : state;
             case 'TOGGLE_TODO':
                 return handleToggle(state, action);
+            case 'DELETE_TODOS':
+                state = action.response.result;
+                return state;
             default:
                 return state
         }

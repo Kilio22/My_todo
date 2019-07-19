@@ -28,6 +28,11 @@ const errorTodos = (filter, error) => ({
     type: 'REQUEST_ERROR',
     message: error.message || 'Something went wrong.',
     filter
+});
+
+const deleteTodos = (response) => ({
+    type: 'DELETE_TODOS',
+    response: normalize(response, schema.arrayOfTodos)
 })
 
 export const fetchTodos = (filter) => (dispatch, getState) => {
@@ -49,3 +54,9 @@ export const toggleTodo = (id) => (dispatch) => {
         })
     })
 };
+
+export const deleteTodo = (id) => (dispatch) => {
+    return (api.deleteTodo(id).then((response) => {
+        dispatch(deleteTodos(response));
+    }));
+}
